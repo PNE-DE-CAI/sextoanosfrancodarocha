@@ -1,0 +1,1076 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Painel SARESP 6º Anos</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: casca azul-marinho com cabeçalho em pílula, abas em pílula e cartões brancos (identidade do Calendário Pedagógico).
+   Filtros numa linha só, acima dos cartões; gráficos desenhados em SVG sobre o cartão branco. */
+:root {
+  --navy: #0a2f6c;
+  --navy-deep: #041a3a;
+  --shell: #0f1a24;
+  --red: #d32f2f;
+  --red-dark: #b71c1c;
+  --gold: #ffec9e;
+  --ink: #1e293b;
+  --muted: #5b6b82;
+  --line: #e2e8f0;
+  --wash: #f1f5f9;
+  --paper: #ffffff;
+  --hl: #eef3fb;
+  --good: #1a7a4a;
+  --bad: #d32f2f;
+  --band-ab: #d32f2f;
+  --band-ba: #6a9be3;
+  --band-pr: #0a2f6c;
+  --font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  font-family: var(--font);
+  background-color: var(--navy-deep);
+  background-image: linear-gradient(145deg, #0a2f6c 0%, #041a3a 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  padding-block: 20px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.main-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  background: var(--shell);
+  border-radius: 48px;
+  padding: 20px;
+  box-shadow: 0 30px 35px rgba(0, 0, 0, 0.5), inset 0 1px 4px rgba(255, 255, 200, 0.1);
+  border: 1px solid var(--red);
+}
+
+/* ===== CABEÇALHO ===== */
+.header {
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(10, 47, 108, 0.85);
+  backdrop-filter: blur(4px);
+  padding: 12px 24px;
+  border-radius: 60px;
+  margin-bottom: 25px;
+  flex-wrap: wrap; gap: 15px;
+}
+.logo-area { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; min-width: 0; }
+.logo-area img, .logo-ph {
+  height: 55px; width: auto; border-radius: 12px; background: #fff; padding: 4px; object-fit: contain;
+}
+.logo-ph { width: 55px; display: grid; place-items: center; color: var(--navy); }
+.logo-text { font-size: 1rem; font-weight: 600; color: var(--gold); line-height: 1.3; min-width: 0; }
+.logo-text small { display: block; font-weight: 400; font-size: 0.75rem; color: rgba(255, 236, 158, 0.6); }
+.title-badge {
+  background: var(--red); color: #fff; padding: 6px 18px; border-radius: 3rem;
+  font-weight: 700; letter-spacing: 1px; font-size: 0.85rem;
+}
+
+/* ===== NAVEGAÇÃO E FILTROS ===== */
+.nav-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; padding: 0 6px; }
+.nav-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.78);
+  padding: 10px 20px; border-radius: 60px; font-weight: 600; font-size: 0.85rem;
+  cursor: pointer; transition: all 0.25s ease; font-family: var(--font); letter-spacing: 0.3px;
+  backdrop-filter: blur(2px);
+}
+.nav-btn:hover { background: rgba(211, 47, 47, 0.25); color: #fff; border-color: var(--red); }
+.nav-btn.active { background: var(--red); color: #fff; border-color: var(--red); box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4); }
+.nav-btn:focus-visible, .th-btn:focus-visible, .chip-btn:focus-visible, select:focus-visible, input:focus-visible {
+  outline: 2px solid var(--gold); outline-offset: 2px;
+}
+
+.filters {
+  display: flex; flex-wrap: wrap; gap: 10px 28px; align-items: center;
+  margin: 0 6px 22px; padding: 12px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 28px;
+  background: rgba(255, 255, 255, 0.04);
+}
+.fgroup { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.flabel { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); margin-right: 4px; }
+.nav-btn.sm { padding: 6px 14px; font-size: 0.8rem; }
+
+/* ===== CARTÕES ===== */
+.app { display: block; padding: 0 4px 8px; }
+.card {
+  background: var(--paper); border-radius: 32px; padding: 1.8rem 2rem; margin-bottom: 24px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); border: 1px solid #e0e4e9;
+  min-width: 0;
+}
+.card h2 { font-size: 1.45rem; font-weight: 800; color: var(--navy); margin-bottom: 0.4rem; text-wrap: balance; }
+.card h3 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin: 1.4rem 0 0.6rem; }
+.card p { color: var(--ink); line-height: 1.6; }
+.card p.sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 1rem; max-width: 70ch; }
+.badge {
+  display: inline-block; background: var(--red); color: #fff; padding: 4px 16px; border-radius: 60px;
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px;
+}
+.badge.azul { background: var(--navy); }
+.badge.verde { background: var(--good); }
+.badge.dourado { background: #8a6508; }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 20px; margin: 0; }
+.grid-2 > .card { margin-bottom: 0; }
+.stack-gap { display: grid; gap: 24px; }
+
+/* ===== KPIs ===== */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin: 8px 0 6px; }
+.kpi { background: var(--wash); border-radius: 20px; padding: 1rem 1.2rem; border: 2px solid transparent; min-width: 0; }
+.kpi.focus { border-color: var(--navy); background: var(--hl); }
+.kpi .k-lab { font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; display: flex; align-items: center; gap: 8px; }
+.kpi .k-key { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+.kpi .k-val { font-size: 2.1rem; font-weight: 800; color: var(--navy); line-height: 1.15; margin-top: 4px; }
+.kpi .k-sub { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 5px; margin-top: 8px; padding: 3px 11px; border-radius: 60px;
+  font-size: 0.78rem; font-weight: 700; font-variant-numeric: tabular-nums;
+}
+.chip.good { background: #dcf3e6; color: #115c36; }
+.chip.bad { background: #fbe1e1; color: #9b1c1c; }
+.chip.neutral { background: #e3eaf6; color: var(--navy); }
+
+/* ===== GRÁFICOS ===== */
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0.4rem 0 0.8rem; font-size: 0.82rem; font-weight: 600; color: var(--ink); }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.legend i { width: 14px; height: 14px; border-radius: 4px; display: inline-block; flex: none; }
+.legend i.dot { border-radius: 50%; }
+.chart { width: 100%; min-width: 0; }
+.chart svg { display: block; max-width: 100%; overflow: visible; }
+.ax-lab { font: 600 12px var(--font); fill: var(--ink); }
+.ax-lab.strong { font-weight: 800; fill: var(--navy); }
+.ax-tick { font: 500 11px var(--font); fill: var(--muted); font-variant-numeric: tabular-nums; }
+.ax-title { font: 600 11px var(--font); fill: var(--muted); }
+.val-lab { font: 700 12px var(--font); fill: var(--ink); font-variant-numeric: tabular-nums; }
+.seg-lab { font: 700 12px var(--font); pointer-events: none; font-variant-numeric: tabular-nums; }
+.pt-lab { font: 600 11px var(--font); fill: var(--ink); pointer-events: none; }
+.q-lab { font: 700 10px var(--font); fill: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; pointer-events: none; }
+.grid-line { stroke: #e1e5ec; stroke-width: 1; }
+.zero-line { stroke: #94a3b8; stroke-width: 1.5; }
+.seg, .hit, .pt { outline: none; }
+.seg rect.m:hover, .seg:focus-visible rect.m { filter: brightness(1.12); }
+.seg:focus-visible rect.m { stroke: #0f1a24; stroke-width: 3; }
+.hit:hover .row-bg, .hit:focus-visible .row-bg { fill: rgba(10, 47, 108, 0.06); }
+.pt:hover circle.dotm, .pt:focus-visible circle.dotm { stroke: #0f1a24; stroke-width: 3; }
+
+.tip-pop {
+  position: fixed; z-index: 50; left: 0; top: 0; pointer-events: none; opacity: 0; transition: opacity 0.12s;
+  background: #0f1a24; color: #fff; border: 1px solid rgba(255, 236, 158, 0.3); border-radius: 14px;
+  padding: 10px 12px; font-size: 12px; max-width: 270px; box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+.tip-pop.on { opacity: 1; }
+.t-title { font-weight: 700; color: var(--gold); margin-bottom: 6px; line-height: 1.3; }
+.t-row { display: flex; align-items: center; gap: 8px; padding: 2px 0; }
+.t-key { width: 12px; height: 4px; border-radius: 2px; flex: none; }
+.t-val { font-weight: 800; font-size: 13px; font-variant-numeric: tabular-nums; }
+.t-lab { color: rgba(255, 255, 255, 0.72); }
+
+/* ===== TABELA ===== */
+.tbl-tools { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; margin: 0.6rem 0 0.9rem; }
+.tbl-tools label { font-weight: 600; font-size: 0.85rem; color: var(--navy); }
+input[type="search"], select {
+  font-family: var(--font); font-size: 0.92rem; padding: 0.6rem 1rem; border: 1px solid #cbd5e1; border-radius: 16px;
+  background: #fff; color: var(--ink); min-width: 0; max-width: 100%;
+}
+input[type="search"] { width: min(100%, 320px); }
+select { width: min(100%, 460px); }
+.tbl-wrap { overflow-x: auto; border-radius: 18px; border: 1px solid var(--line); }
+table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.88rem; min-width: 1020px; margin: 0; }
+th { background: var(--navy); color: #fff; padding: 0.55rem 0.75rem; text-align: left; font-weight: 700; white-space: nowrap; }
+thead th.grp { text-align: center; letter-spacing: 0.04em; }
+thead th.grp-ab { background: var(--band-ab); }
+thead th.grp-ba { background: var(--band-ba); color: var(--navy); }
+thead th.grp-pr { background: #082456; }
+th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
+td { padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--line); background: #fff; white-space: nowrap; }
+td.hl { background: var(--hl); }
+tbody tr { cursor: pointer; }
+tbody tr:hover td { background: #e8eefa; }
+tbody tr:focus-visible { outline: 2px solid var(--navy); outline-offset: -2px; }
+th:first-child, td:first-child { position: sticky; left: 0; z-index: 2; }
+td:first-child { font-weight: 600; color: var(--navy); border-right: 1px solid var(--line); }
+tfoot td { font-weight: 800; background: var(--wash); border-top: 2px solid var(--navy); cursor: default; }
+.th-btn {
+  all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; font-weight: 700; font-size: inherit; color: inherit;
+}
+.th-btn .ar { font-size: 0.65rem; opacity: 0.55; }
+th[aria-sort="ascending"] .ar, th[aria-sort="descending"] .ar { opacity: 1; }
+.d { font-weight: 700; }
+.d.good { color: var(--good); }
+.d.bad { color: var(--bad); }
+.d.neutral { color: var(--muted); }
+
+/* ===== DETALHE, SINAIS, GRUPOS ===== */
+.mini { min-width: 0; font-size: 0.86rem; margin: 0.4rem 0 0; }
+.mini th { background: var(--wash); color: var(--navy); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.5rem 0.7rem; }
+.mini td { padding: 0.5rem 0.7rem; }
+.mini td:first-child { position: static; border-right: 0; }
+.mini th:first-child { position: static; }
+.mini-wrap { overflow-x: auto; }
+.signals { list-style: none; display: grid; gap: 10px; }
+.signals li { display: flex; gap: 12px; align-items: baseline; line-height: 1.5; }
+.tag {
+  flex: none; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 3px 10px; border-radius: 60px; min-width: 96px; text-align: center;
+}
+.tag.bad { background: #fbe1e1; color: #9b1c1c; }
+.tag.warn { background: #fff3cd; color: #7a5b00; }
+.tag.good { background: #dcf3e6; color: #115c36; }
+.tag.neutral { background: #e3eaf6; color: var(--navy); }
+.reads { list-style: none; display: grid; gap: 12px; }
+.reads li { line-height: 1.55; padding-left: 14px; border-left: 3px solid var(--line); }
+.reads li b { color: var(--navy); }
+.rule { background: var(--wash); border-radius: 14px; padding: 0.6rem 0.9rem; font-size: 0.85rem; color: var(--muted); margin: 0.2rem 0 1rem; line-height: 1.5; }
+.school-list { display: grid; gap: 8px; list-style: none; }
+.chip-btn {
+  all: unset; cursor: pointer; box-sizing: border-box; width: 100%; display: block; padding: 0.6rem 0.9rem;
+  border-radius: 16px; border: 1px solid var(--line); background: #fff; transition: all 0.2s;
+}
+.chip-btn:hover { border-color: var(--navy); background: var(--hl); }
+.chip-btn b { display: block; color: var(--navy); font-size: 0.92rem; }
+.chip-btn span { display: block; font-size: 0.8rem; color: var(--muted); margin-top: 2px; font-variant-numeric: tabular-nums; }
+.empty { color: var(--muted); font-style: italic; }
+.notes { display: grid; gap: 14px; list-style: none; }
+.notes li { line-height: 1.6; padding-left: 14px; border-left: 3px solid var(--navy); max-width: 80ch; }
+.head-line { display: flex; flex-wrap: wrap; gap: 8px; margin: 0.6rem 0 0; }
+.head-line .chip { margin-top: 0; }
+
+/* ===== RODAPÉ ===== */
+.page-footer {
+  text-align: center; font-size: 0.75rem; color: rgba(255, 236, 158, 0.6); margin-top: 30px; padding: 10px 0 6px;
+  font-weight: 400; border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 960px) {
+  .main-container { border-radius: 28px; padding: 14px; }
+  .header { border-radius: 32px; }
+  .card { padding: 1.5rem; }
+}
+@media (max-width: 500px) {
+  body { padding-block: 10px; }
+  .main-container { border-radius: 20px; padding: 10px; }
+  .header { border-radius: 24px; padding: 10px 16px; flex-direction: column; align-items: flex-start; }
+  .logo-area img, .logo-ph { height: 40px; }
+  .logo-ph { width: 40px; }
+  .card { padding: 1.2rem; border-radius: 20px; }
+  .nav-btn { padding: 8px 14px; font-size: 0.75rem; }
+  .filters { border-radius: 20px; padding: 10px 12px; }
+  .kpi .k-val { font-size: 1.8rem; }
+  .signals li { flex-direction: column; gap: 4px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+
+<div class="main-container">
+
+  <!-- CABEÇALHO -->
+  <div class="header">
+    <div class="logo-area">
+      <img id="logo" alt="Logo Seduc SP" hidden>
+      <span class="logo-ph" id="logoPh" aria-hidden="true">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8.5 12 4l10 4.5-10 4.5L2 8.5Z"/><path d="M6 10.5V16c0 1.2 2.7 2.5 6 2.5s6-1.3 6-2.5v-5.5"/><path d="M22 8.5V14"/></svg>
+      </span>
+      <div class="logo-text">
+        6º anos · Franco da Rocha · 2026
+        <small>SARESP Diagnóstico e AvDs 1 e 2 · URE Caieiras · Secretaria da Educação — São Paulo</small>
+      </div>
+    </div>
+    <span class="title-badge">SEDUC SP</span>
+  </div>
+
+  <nav class="nav-bar" id="nav" role="tablist" aria-label="Seções do painel"></nav>
+
+  <div class="filters" id="filters">
+    <div class="fgroup" id="fComp" role="group" aria-label="Componente">
+      <span class="flabel">Componente</span>
+      <button type="button" class="nav-btn sm" data-comp="LP">Língua Portuguesa</button>
+      <button type="button" class="nav-btn sm" data-comp="MT">Matemática</button>
+    </div>
+    <div class="fgroup" id="fBand" role="group" aria-label="Faixa em foco">
+      <span class="flabel">Faixa em foco</span>
+      <button type="button" class="nav-btn sm" data-band="ab">Abaixo do Básico</button>
+      <button type="button" class="nav-btn sm" data-band="ba">Básico</button>
+      <button type="button" class="nav-btn sm" data-band="pr">Proficiente</button>
+    </div>
+  </div>
+
+  <main class="app" id="app">
+
+    <!-- PANORAMA -->
+    <section id="s-panorama" hidden>
+      <div class="card">
+        <span class="badge azul" id="pBadge"></span>
+        <h2>Como a rede evoluiu</h2>
+        <p class="sub">Média simples das 16 escolas com 6º ano. A 1ª e a 2ª AvD mostram a distribuição dos estudantes por faixa de proficiência.</p>
+        <div class="kpis" id="pKpis"></div>
+        <h3>Distribuição por faixa na rede</h3>
+        <div class="legend" id="pLegend"></div>
+        <div class="chart" id="pStack"></div>
+      </div>
+      <div class="card">
+        <span class="badge" id="rBadge"></span>
+        <h2 id="rTitle"></h2>
+        <p class="sub" id="rSub"></p>
+        <div class="legend" id="rLegend"></div>
+        <div class="chart" id="pRank"></div>
+      </div>
+      <div class="card">
+        <span class="badge dourado">Leituras rápidas</span>
+        <h2 id="readsTitle"></h2>
+        <ul class="reads" id="pReads"></ul>
+      </div>
+    </section>
+
+    <!-- ESCOLAS -->
+    <section id="s-escolas" hidden>
+      <div class="card">
+        <span class="badge azul" id="tBadge"></span>
+        <h2>Todas as escolas</h2>
+        <p class="sub">Clique em um título de coluna para ordenar e em uma escola para abrir o detalhe. Δ é a diferença entre a 2ª e a 1ª AvD, em pontos percentuais.</p>
+        <div class="tbl-tools">
+          <label for="q">Buscar escola</label>
+          <input type="search" id="q" placeholder="Digite parte do nome" autocomplete="off">
+        </div>
+        <div class="tbl-wrap"><table id="tbl"></table></div>
+      </div>
+    </section>
+
+    <!-- COMPARAR -->
+    <section id="s-comparar" hidden>
+      <div class="card">
+        <span class="badge azul">Detalhe por escola</span>
+        <h2 id="cName"></h2>
+        <div class="tbl-tools">
+          <label for="cSel">Escola</label>
+          <select id="cSel"></select>
+        </div>
+        <div class="head-line" id="cHead"></div>
+      </div>
+      <div class="grid-2" id="cCards" style="margin-bottom:24px"></div>
+      <div class="card">
+        <span class="badge dourado">Sinais</span>
+        <h2>O que chama atenção nesta escola</h2>
+        <p class="sub">Leitura automática pelos mesmos critérios usados na aba Grupos de ação.</p>
+        <ul class="signals" id="cSignals"></ul>
+      </div>
+    </section>
+
+    <!-- QUADRANTES -->
+    <section id="s-quadrantes" hidden>
+      <div class="card">
+        <span class="badge azul" id="qBadge"></span>
+        <h2>Abaixo do Básico e Proficiente, lado a lado</h2>
+        <p class="sub">Cada ponto é uma escola. A posição mostra para onde os estudantes se moveram entre a 1ª e a 2ª AvD. Escolas no quadrante superior direito reduziram menos (ou aumentaram) o Abaixo do Básico mesmo com mais estudantes proficientes: o grupo do meio se dividiu.</p>
+        <div class="legend" id="qLegend"></div>
+        <div class="chart" id="qChart"></div>
+      </div>
+    </section>
+
+    <!-- GRUPOS -->
+    <section id="s-grupos" hidden>
+      <div class="card">
+        <span class="badge dourado">Grupos de ação</span>
+        <h2>Onde agir primeiro</h2>
+        <p class="sub">Os grupos seguem regras escritas em cada cartão e são calculados direto da tabela. Uma escola pode aparecer em mais de um grupo. Clique em uma escola para abrir o detalhe.</p>
+      </div>
+      <div class="grid-2" id="gCards"></div>
+    </section>
+
+    <!-- NOTAS -->
+    <section id="s-notas" hidden>
+      <div class="card">
+        <span class="badge">Notas</span>
+        <h2>Como ler estes números</h2>
+        <ul class="notes">
+          <li><b>Média da rede</b> é a média simples das 16 escolas. Não há número de estudantes por escola nos dados, então escolas pequenas pesam igual às grandes e oscilam mais.</li>
+          <li><b>1ª e 2ª AvD</b> são instrumentos diferentes do SARESP Diagnóstico, com dificuldade própria. As variações indicam tendência e não ganho de aprendizagem exato.</li>
+          <li><b>Ranking AvD</b> (9º, 53º, 58º...) aparece como foi informado. O universo de comparação não consta nos dados, por isso o painel não usa o ranking em cálculos.</li>
+          <li><b>Diagnóstico</b> é a nota do SARESP Diagnóstico por componente (LPT e MAT) no início de 2026.</li>
+          <li><b>Pontos percentuais (p.p.)</b> medem a diferença entre dois percentuais. Os painéis calculam a variação da rede sobre as médias exatas. Por isso, a queda do Abaixo do Básico em LP aparece como 7,0 p.p., e não 7,1 como resultaria de subtrair 16,1% e 9,0% já arredondados.</li>
+          <li><b>Somas</b> de cada linha ficam entre 99,9% e 100,1% por arredondamento da fonte.</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="page-footer">Fonte: SARESP Diagnóstico 2026 e AvDs 1 e 2 · 6º anos das 16 escolas de Franco da Rocha · URE Caieiras</div>
+</div>
+
+<div id="tip" class="tip-pop" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  // Para mostrar o logo oficial, cole aqui o endereço de dados (data:image/png;base64,...) da imagem.
+  var LOGO_SRC = '';
+  (function () {
+    var img = document.getElementById('logo'), ph = document.getElementById('logoPh');
+    if (LOGO_SRC) { img.src = LOGO_SRC; img.hidden = false; ph.hidden = true; }
+  })();
+
+  /* ---------- DADOS ---------- */
+  // [nome, curto, código, diagLP, diagMT, rkLP, LP ab1, ab2, ba1, ba2, pr1, pr2, rkMT, MT ab1, ab2, ba1, ba2, pr1, pr2]
+  var RAW = [["Adail Jarbas Duclos","Adail J. Duclos","48823",5.9,4.7,9,7.9,3.2,65.1,61.9,27,34.9,19,8.1,9.7,69.4,50,22.6,40.3],["Azevedo Soares","Azevedo Soares","5666",4.7,4,53,21.9,7.7,50,53.8,28.1,38.5,54,15.2,1.5,57.6,41.5,27.3,56.9],["Prof. Benedito Aparecido Tavares","Benedito A. Tavares","910636",5.8,5.1,18,10.5,6.2,66.3,76.3,23.2,17.5,10,6.3,4.1,71.9,55.7,21.9,40.2],["Prof. Domingos Cambiaghi","Domingos Cambiaghi","5708",5.7,4.8,17,10.5,3.7,66.7,50.5,22.9,45.9,36,11.3,4.6,63.2,53.2,25.5,42.2],["Profa. Elvira Parada Manga","Elvira P. Manga","48811",5.8,4.5,37,15.9,13,73.9,62.3,10.1,24.6,57,15.9,7.2,62.3,63.8,21.7,29],["Profa. Iraci Sartori Vieira da Silva","Iraci S. V. da Silva","5769",5.2,4.4,24,12.1,7.6,68.2,61.8,19.7,30.6,32,10.5,4.8,70.7,65.5,18.8,29.7],["Profa. Isaura de Miranda Botto","Isaura M. Botto","5678",5.3,4.3,48,20.4,9.4,59.2,71.9,20.4,18.8,8,6.1,12.5,77.8,60.4,16.2,27.1],["Profa. Ivone dos Anjos da Silva Campos","Ivone A. S. Campos","269396",6,5.5,22,11.3,8.4,63.4,56.6,25.4,35,21,8.5,3.4,59.2,47.6,32.4,49],["Profa. Jocimara Vieira da Silva","Jocimara V. da Silva","923643",5.3,4.6,26,13,7.6,67.9,57.6,19.1,34.8,52,14.5,6.1,67.9,47.7,17.6,46.2],["Prof. José Parada","José Parada","50436",5.1,4.1,58,25.2,14.1,65.2,71.7,9.6,14.1,47,12.1,9.4,75.9,71.9,12.1,18.8],["Profa. Katia Maria Tarifa Leme Tonelli","Katia Tonelli","50428",5.4,4.4,27,13.1,14.1,65.8,62.9,21.1,22.9,39,11.6,5.2,70.2,69.8,18.2,25],["Vereador Luiz Alexandre dos Santos","Luiz A. dos Santos","921038",5.4,4.7,55,22,11.8,69.5,68.2,8.5,20,50,12.9,13.6,63.5,59.1,23.5,27.3],["Paulo Duarte","Paulo Duarte","902676",5.5,4.6,33,14.4,7.5,69.7,63.4,15.9,29.1,26,9,7.6,67.9,59.8,23.1,32.6],["Prefeito Pedro Lelis de Souza","Pedro Lelis de Souza","406806",4.8,4,34,15.2,10.6,65.2,63.8,19.6,25.5,33,10.9,13,69.6,58.7,19.6,28.3],["Profa. Rituco Mitani","Rituco Mitani","5691",6.1,5,49,20.6,11.4,55.9,54.3,23.5,34.3,24,8.8,11.4,64.7,40,26.5,48.6],["Prof. Zilton Bicudo","Zilton Bicudo","925482",5.5,4.6,56,23,8.1,57.2,60.3,19.7,31.6,51,13.2,6.6,65.8,65.7,21.1,27.7]];
+  var S = RAW.map(function (r) {
+    return {
+      name: r[0], short: r[1], code: r[2],
+      LP: { diag: r[3], rk: r[5], ab: [r[6], r[7]], ba: [r[8], r[9]], pr: [r[10], r[11]] },
+      MT: { diag: r[4], rk: r[12], ab: [r[13], r[14]], ba: [r[15], r[16]], pr: [r[17], r[18]] }
+    };
+  });
+
+  var BAND = { ab: 'Abaixo do Básico', ba: 'Básico', pr: 'Proficiente' };
+  var COMP = { LP: 'Língua Portuguesa', MT: 'Matemática' };
+  var BAND_COL = { ab: '#d32f2f', ba: '#6a9be3', pr: '#0a2f6c' };
+  var NAVY = '#0a2f6c', RED = '#d32f2f', MID = '#6a9be3';
+  var TABS = [
+    ['panorama', 'Panorama'], ['escolas', 'Escolas'], ['comparar', 'Comparar escola'],
+    ['quadrantes', 'Quadrantes'], ['grupos', 'Grupos de ação'], ['notas', 'Notas']
+  ];
+  var FILTER_TABS = { panorama: ['comp', 'band'], escolas: ['comp', 'band'], quadrantes: ['comp'] };
+
+  var state = { tab: 'panorama', comp: 'LP', band: 'pr', school: 1, sort: 'prD', dir: -1, q: '' };
+
+  /* ---------- UTILITÁRIOS ---------- */
+  function $(s, r) { return (r || document).querySelector(s); }
+  function fmt(x, d) { return x.toFixed(d == null ? 1 : d).replace('.', ','); }
+  function pct(x) { return fmt(x) + '%'; }
+  function r1(x) { return Math.round(x * 10) / 10; }
+  function dpp(x) { var v = r1(x); return (v > 0 ? '+' : v < 0 ? '−' : '') + fmt(Math.abs(v)) + ' p.p.'; }
+  function dnum(x) { var v = r1(x); return (v > 0 ? '+' : v < 0 ? '−' : '') + fmt(Math.abs(v)); }
+  function arrow(x) { var v = r1(x); return v > 0 ? '▲' : v < 0 ? '▼' : '■'; }
+  function mean(a) { return a.reduce(function (s, x) { return s + x; }, 0) / a.length; }
+  function delta(s, c, b) { return r1(s[c][b][1] - s[c][b][0]); }
+  function net(c, b, i) { return mean(S.map(function (s) { return s[c][b][i]; })); }
+  function tone(b, d) {
+    var v = r1(d);
+    if (b === 'ba' || v === 0) return 'neutral';
+    return (b === 'ab' ? v < 0 : v > 0) ? 'good' : 'bad';
+  }
+  function names(list) { return list.map(function (s) { return s.short; }).join(', '); }
+
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs, parent, text) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (text != null) e.textContent = text;
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function h(tag, attrs, children) {
+    var e = document.createElement(tag);
+    attrs = attrs || {};
+    for (var k in attrs) {
+      if (k === 'class') e.className = attrs[k];
+      else if (k === 'text') e.textContent = attrs[k];
+      else if (k === 'css') e.style.cssText = attrs[k];
+      else e.setAttribute(k, attrs[k]);
+    }
+    [].concat(children == null ? [] : children).forEach(function (c) {
+      if (c == null) return;
+      e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c);
+    });
+    return e;
+  }
+
+  /* ---------- TOOLTIP ---------- */
+  var tip = $('#tip');
+  function tipPlace(x, y) {
+    var w = tip.offsetWidth, hh = tip.offsetHeight, L = x + 14, T = y + 14;
+    if (L + w > innerWidth - 8) L = x - w - 14;
+    if (L < 8) L = 8;
+    if (T + hh > innerHeight - 8) T = y - hh - 14;
+    if (T < 8) T = 8;
+    tip.style.left = L + 'px'; tip.style.top = T + 'px';
+  }
+  function tipShow(x, y, t) {
+    tip.replaceChildren();
+    tip.appendChild(h('div', { class: 't-title', text: t.title }));
+    t.rows.forEach(function (r) {
+      var row = h('div', { class: 't-row' });
+      if (r.color) row.appendChild(h('span', { class: 't-key', css: 'background:' + r.color }));
+      row.appendChild(h('span', { class: 't-val', text: r.value }));
+      row.appendChild(h('span', { class: 't-lab', text: r.label }));
+      tip.appendChild(row);
+    });
+    tip.classList.add('on');
+    tipPlace(x, y);
+  }
+  function tipHide() { tip.classList.remove('on'); }
+  function bindTip(node, fn) {
+    function move(e) { tipShow(e.clientX, e.clientY, fn()); }
+    node.addEventListener('pointermove', move);
+    node.addEventListener('pointerdown', move);
+    node.addEventListener('pointerleave', tipHide);
+    node.addEventListener('focus', function () {
+      var b = node.getBoundingClientRect();
+      tipShow(b.left + b.width / 2, b.top, fn());
+    });
+    node.addEventListener('blur', tipHide);
+  }
+  window.addEventListener('scroll', tipHide, { passive: true });
+
+  /* ---------- GRÁFICOS ---------- */
+  function legend(host, items, dot) {
+    host.replaceChildren();
+    items.forEach(function (it) {
+      host.appendChild(h('span', {}, [h('i', { class: dot ? 'dot' : '', css: 'background:' + it.color }), it.label]));
+    });
+  }
+
+  // Barras 100% empilhadas: rows = [{label, vals:[ab,ba,pr], strong, gapBefore, title}]
+  function stackedChart(host, rows, opts) {
+    opts = opts || {};
+    host.replaceChildren();
+    var W = Math.max(280, host.clientWidth), labW = opts.labW || (W < 520 ? 78 : 100);
+    var rowH = 36, gap = 12, padT = 2, extra = 0;
+    rows.forEach(function (r, i) { if (i && r.gapBefore) extra += r.gapBefore; });
+    var H = padT + rows.length * (rowH + gap) - gap + extra + 2;
+    var svg = el('svg', { width: W, height: H, viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': opts.aria || 'Distribuição por faixa' }, host);
+    var bw = W - labW - 2, y = padT;
+    rows.forEach(function (r, i) {
+      if (i && r.gapBefore) y += r.gapBefore;
+      el('text', { x: labW - 10, y: y + rowH / 2 + 4, 'text-anchor': 'end', 'class': 'ax-lab' + (r.strong ? ' strong' : '') }, svg, r.label);
+      var tot = r.vals.reduce(function (a, b) { return a + b; }, 0), acc = 0;
+      r.vals.forEach(function (v, k) {
+        var b = ['ab', 'ba', 'pr'][k], w = v / tot * bw;
+        var g = el('g', { 'class': 'seg', tabindex: 0, role: 'img', 'aria-label': r.label + ': ' + BAND[b] + ' ' + pct(v) }, svg);
+        el('rect', { 'class': 'm', x: labW + acc, y: y, width: Math.max(0, w), height: rowH, fill: BAND_COL[b], stroke: '#fff', 'stroke-width': 2 }, g);
+        if (w >= 46) el('text', { 'class': 'seg-lab', x: labW + acc + w / 2, y: y + rowH / 2 + 4, 'text-anchor': 'middle', fill: b === 'ba' ? '#0a2f6c' : '#fff' }, g, pct(v));
+        (function (b, v) {
+          bindTip(g, function () {
+            var rowsT = [{ color: BAND_COL[b], value: pct(v), label: BAND[b] }];
+            if (r.extra) rowsT = rowsT.concat(r.extra(b));
+            return { title: r.title || r.label, rows: rowsT };
+          });
+        })(b, v);
+        acc += w;
+      });
+      y += rowH + gap;
+    });
+  }
+
+  function niceStep(span, maxTicks) {
+    var steps = [1, 2, 5, 10, 20, 25, 50];
+    for (var i = 0; i < steps.length; i++) if (span / steps[i] <= maxTicks) return steps[i];
+    return 50;
+  }
+
+  // Barras de variação em torno de zero: items = [{school, d, tone, from, to}]
+  function deltaChart(host, items, opts) {
+    host.replaceChildren();
+    var W = Math.max(280, host.clientWidth), narrow = W < 520, labW = narrow ? 100 : 156;
+    var rowH = 24, gap = 8, top = 4, axisH = 34;
+    var vals = items.map(function (i) { return i.d; });
+    var mn = Math.min.apply(null, vals.concat([0])), mx = Math.max.apply(null, vals.concat([0]));
+    var padL = mn < 0 ? (narrow ? 36 : 54) : 6, padR = mx > 0 ? (narrow ? 40 : 54) : 6;
+    var maxTicks = Math.max(2, Math.floor((W - labW - padL - padR) / (narrow ? 46 : 60)));
+    var step = niceStep(mx - mn, maxTicks);
+    var lo = Math.floor(mn / step) * step, hi = Math.ceil(mx / step) * step;
+    var x0 = labW + padL, pw = W - x0 - padR;
+    function x(v) { return x0 + (v - lo) / (hi - lo) * pw; }
+    var H = top + items.length * (rowH + gap) + axisH;
+    var svg = el('svg', { width: W, height: H, viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': opts.aria || 'Variação por escola' }, host);
+    var plotB = top + items.length * (rowH + gap);
+    for (var t = lo; t <= hi + 1e-9; t += step) {
+      el('line', { 'class': t === 0 ? 'zero-line' : 'grid-line', x1: x(t), x2: x(t), y1: top - 2, y2: plotB }, svg);
+      el('text', { 'class': 'ax-tick', x: x(t), y: plotB + 16, 'text-anchor': 'middle' }, svg, (t > 0 ? '+' : t < 0 ? '−' : '') + Math.abs(t));
+    }
+    el('text', { 'class': 'ax-title', x: x0 + pw / 2, y: plotB + 31, 'text-anchor': 'middle' }, svg, 'Variação 2ª − 1ª AvD (p.p.)');
+    items.forEach(function (it, i) {
+      var y = top + i * (rowH + gap), c = it.color;
+      var g = el('g', { 'class': 'hit', tabindex: 0, role: 'img', 'aria-label': it.school.short + ': ' + dpp(it.d) }, svg);
+      el('rect', { 'class': 'row-bg', x: 0, y: y - gap / 2, width: W, height: rowH + gap, fill: 'transparent' }, g);
+      el('text', { 'class': 'ax-lab', x: labW - 10, y: y + rowH / 2 + 4, 'text-anchor': 'end' }, g, it.school.short);
+      var a = x(0), b = x(it.d), bx = Math.min(a, b), bwid = Math.max(2, Math.abs(b - a));
+      el('rect', { x: bx, y: y, width: bwid, height: rowH, rx: 4, fill: c }, g);
+      var pos = it.d >= 0;
+      el('text', { 'class': 'val-lab', x: pos ? bx + bwid + 6 : bx - 6, y: y + rowH / 2 + 4, 'text-anchor': pos ? 'start' : 'end' }, g, dnum(it.d));
+      bindTip(g, function () {
+        return {
+          title: it.school.name, rows: [
+            { color: c, value: dpp(it.d), label: 'variação' },
+            { value: pct(it.from), label: '1ª AvD' },
+            { value: pct(it.to), label: '2ª AvD' }
+          ]
+        };
+      });
+    });
+  }
+
+  // Dispersão: pts = [{school, x, y, color}]
+  function scatter(host, pts, opts) {
+    host.replaceChildren();
+    var W = Math.max(280, host.clientWidth), H = W < 520 ? 380 : 480;
+    var L = 48, R = 18, T = 14, B = 46;
+    var xs = pts.map(function (p) { return p.x; }), ys = pts.map(function (p) { return p.y; });
+    var xlo = Math.min.apply(null, xs.concat([0])), xhi = Math.max.apply(null, xs.concat([0]));
+    var ylo = Math.min.apply(null, ys.concat([0])), yhi = Math.max.apply(null, ys.concat([0]));
+    var sx = niceStep(xhi - xlo, W < 520 ? 4 : 7), sy = niceStep(yhi - ylo, 7);
+    xlo = Math.floor(xlo / sx) * sx; xhi = Math.ceil(xhi / sx) * sx;
+    ylo = Math.floor(ylo / sy) * sy; yhi = Math.ceil(yhi / sy) * sy;
+    var pw = W - L - R, ph = H - T - B;
+    function X(v) { return L + (v - xlo) / (xhi - xlo) * pw; }
+    function Y(v) { return T + (yhi - v) / (yhi - ylo) * ph; }
+    var svg = el('svg', { width: W, height: H, viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': 'Dispersão das variações por escola' }, host);
+    var v;
+    for (v = xlo; v <= xhi + 1e-9; v += sx) {
+      el('line', { 'class': v === 0 ? 'zero-line' : 'grid-line', x1: X(v), x2: X(v), y1: T, y2: T + ph }, svg);
+      el('text', { 'class': 'ax-tick', x: X(v), y: T + ph + 16, 'text-anchor': 'middle' }, svg, (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v));
+    }
+    for (v = ylo; v <= yhi + 1e-9; v += sy) {
+      el('line', { 'class': v === 0 ? 'zero-line' : 'grid-line', x1: L, x2: L + pw, y1: Y(v), y2: Y(v) }, svg);
+      el('text', { 'class': 'ax-tick', x: L - 8, y: Y(v) + 4, 'text-anchor': 'end' }, svg, (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v));
+    }
+    el('text', { 'class': 'ax-title', x: L + pw / 2, y: H - 6, 'text-anchor': 'middle' }, svg, 'Variação do Abaixo do Básico (p.p.). Valores à esquerda indicam redução.');
+    var yt = el('text', { 'class': 'ax-title', x: 12, y: T + ph / 2, 'text-anchor': 'middle', transform: 'rotate(-90 12 ' + (T + ph / 2) + ')' }, svg, 'Variação do Proficiente (p.p.)');
+    // rótulos de quadrante
+    var narrow = W < 520;
+    el('text', { 'class': 'q-lab', x: L + 8, y: T + 14 }, svg, narrow ? 'Melhora' : 'Melhora geral');
+    el('text', { 'class': 'q-lab', x: L + pw - 8, y: T + 14, 'text-anchor': 'end' }, svg, narrow ? 'Polarização' : 'Polarização: ambos sobem');
+    el('text', { 'class': 'q-lab', x: L + 8, y: T + ph - 8 }, svg, narrow ? 'Vai ao Básico' : 'Desloca para o Básico');
+    el('text', { 'class': 'q-lab', x: L + pw - 8, y: T + ph - 8, 'text-anchor': 'end' }, svg, narrow ? 'Piora' : 'Piora: Abaixo sobe, Prof. cai');
+    // quais pontos recebem rótulo direto
+    var byY = pts.slice().sort(function (a, b) { return b.y - a.y; });
+    var byX = pts.slice().sort(function (a, b) { return a.x - b.x; });
+    var lab = [].concat(byY.slice(0, 3), byY.slice(-2), byX.slice(0, 2), byX.slice(-2));
+    var seen = {}, boxes = [];
+    lab = lab.filter(function (p) { if (seen[p.school.short]) return false; seen[p.school.short] = 1; return true; });
+    pts.forEach(function (p) {
+      var cx = X(p.x), cy = Y(p.y);
+      var g = el('g', { 'class': 'pt', tabindex: 0, role: 'img', 'aria-label': p.school.short + ': Abaixo ' + dpp(p.x) + ', Proficiente ' + dpp(p.y) }, svg);
+      el('circle', { cx: cx, cy: cy, r: 15, fill: 'transparent' }, g);
+      el('circle', { 'class': 'dotm', cx: cx, cy: cy, r: 6.5, fill: p.color, stroke: '#fff', 'stroke-width': 2 }, g);
+      bindTip(g, function () {
+        return {
+          title: p.school.name, rows: [
+            { color: BAND_COL.ab, value: dpp(p.x), label: 'Abaixo do Básico (' + pct(p.a0) + ' → ' + pct(p.a1) + ')' },
+            { color: BAND_COL.pr, value: dpp(p.y), label: 'Proficiente (' + pct(p.p0) + ' → ' + pct(p.p1) + ')' }
+          ]
+        };
+      });
+    });
+    lab.forEach(function (p) {
+      var cx = X(p.x), cy = Y(p.y), w = p.school.short.length * 6.3 + 4, hh = 13;
+      var spots = [[cx + 11, cy + 4, 'start'], [cx - 11, cy + 4, 'end'], [cx, cy - 12, 'middle'], [cx, cy + 20, 'middle']];
+      for (var i = 0; i < spots.length; i++) {
+        var s = spots[i], bx = s[2] === 'start' ? s[0] : s[2] === 'end' ? s[0] - w : s[0] - w / 2, by = s[1] - 10;
+        var ok = bx >= 2 && bx + w <= W - 2 && by >= 0 && by + hh <= H;
+        for (var j = 0; ok && j < boxes.length; j++) {
+          var o = boxes[j];
+          if (bx < o[0] + o[2] && bx + w > o[0] && by < o[1] + o[3] && by + hh > o[1]) ok = false;
+        }
+        if (ok) { boxes.push([bx, by, w, hh]); el('text', { 'class': 'pt-lab', x: s[0], y: s[1], 'text-anchor': s[2] }, svg, p.school.short); break; }
+      }
+    });
+  }
+
+  /* ---------- PANORAMA ---------- */
+  function tile(label, val, sub, chipInfo, focus, key) {
+    var t = h('div', { 'class': 'kpi' + (focus ? ' focus' : '') });
+    var l = h('div', { 'class': 'k-lab' });
+    if (key) l.appendChild(h('span', { 'class': 'k-key', css: 'background:' + key }));
+    l.appendChild(document.createTextNode(label));
+    t.appendChild(l);
+    t.appendChild(h('div', { 'class': 'k-val', text: val }));
+    t.appendChild(h('div', { 'class': 'k-sub', text: sub }));
+    if (chipInfo) t.appendChild(h('span', { 'class': 'chip ' + chipInfo.tone, text: arrow(chipInfo.d) + ' ' + dpp(chipInfo.d) + ' desde a 1ª AvD' }));
+    return t;
+  }
+
+  function renderPanorama() {
+    var c = state.comp, b = state.band;
+    $('#pBadge').textContent = COMP[c];
+    var host = $('#pKpis'); host.replaceChildren();
+    var dg = S.map(function (s) { return s[c].diag; });
+    host.appendChild(tile('Diagnóstico SARESP', fmt(mean(dg)), 'Entre escolas: ' + fmt(Math.min.apply(null, dg)) + ' a ' + fmt(Math.max.apply(null, dg)), null, false));
+    ['ab', 'ba', 'pr'].forEach(function (k) {
+      var a = net(c, k, 0), z = net(c, k, 1), d = z - a;
+      host.appendChild(tile(BAND[k] + ' · 2ª AvD', pct(z), '1ª AvD: ' + pct(a), { d: d, tone: tone(k, d) }, k === b, BAND_COL[k]));
+    });
+    legend($('#pLegend'), ['ab', 'ba', 'pr'].map(function (k) { return { label: BAND[k], color: BAND_COL[k] }; }));
+    var rows = [0, 1].map(function (i) {
+      return {
+        label: (i + 1) + 'ª AvD', strong: true, title: 'Rede · ' + (i + 1) + 'ª AvD · ' + COMP[c],
+        vals: ['ab', 'ba', 'pr'].map(function (k) { return net(c, k, i); })
+      };
+    });
+    stackedChart($('#pStack'), rows, { aria: 'Distribuição média da rede por faixa, 1ª e 2ª AvD' });
+
+    // ranking de variação
+    $('#rBadge').textContent = COMP[c];
+    $('#rTitle').textContent = 'Variação do ' + BAND[b] + ' por escola';
+    $('#rSub').textContent = b === 'ab'
+      ? 'Queda é melhora. Escolas ordenadas da maior redução para o aumento.'
+      : b === 'pr' ? 'Alta é melhora. Escolas ordenadas do maior ganho para a maior perda.'
+        : 'O Básico é a faixa do meio: subir ou cair só faz sentido junto com as outras duas faixas. Escolas ordenadas da maior alta para a maior queda.';
+    legend($('#rLegend'), b === 'ba'
+      ? [{ label: 'Subiu', color: NAVY }, { label: 'Caiu', color: MID }]
+      : [{ label: 'Melhorou', color: NAVY }, { label: 'Piorou', color: RED }]);
+    var items = S.map(function (s) {
+      var d = delta(s, c, b), tn = tone(b, d);
+      var col = b === 'ba' ? (d >= 0 ? NAVY : MID) : (tn === 'bad' ? RED : NAVY);
+      return { school: s, d: d, from: s[c][b][0], to: s[c][b][1], color: col };
+    });
+    items.sort(function (p, q) { return b === 'ab' ? p.d - q.d : q.d - p.d; });
+    deltaChart($('#pRank'), items, { aria: 'Variação do ' + BAND[b] + ' em ' + COMP[c] });
+
+    $('#readsTitle').textContent = COMP[c] + ': principais leituras';
+    var ul = $('#pReads'); ul.replaceChildren();
+    insights(c).forEach(function (it) {
+      ul.appendChild(h('li', {}, [h('b', { text: it[0] + '. ' }), it[1]]));
+    });
+  }
+
+  function insights(c) {
+    var out = [];
+    var pr = S.map(function (s) { return { s: s, d: delta(s, c, 'pr') }; }).sort(function (a, b) { return b.d - a.d; });
+    var top = pr[0];
+    out.push(['Maior ganho de proficiência', top.s.short + ': ' + pct(top.s[c].pr[0]) + ' → ' + pct(top.s[c].pr[1]) + ' (' + dpp(top.d) + ').']);
+    var lost = pr.filter(function (x) { return x.d < 0; });
+    out.push(['Perderam proficiência', lost.length ? lost.map(function (x) { return x.s.short + ' (' + dpp(x.d) + ')'; }).join(', ') + '.' : 'Nenhuma escola.']);
+    var up = S.filter(function (s) { return delta(s, c, 'ab') > 0; });
+    out.push(['Abaixo do Básico subiu', up.length ? up.map(function (s) { return s.short + ' (' + dpp(delta(s, c, 'ab')) + ')'; }).join(', ') + '.' : 'Em nenhuma escola.']);
+    var pol = S.filter(function (s) { return delta(s, c, 'ab') > 0 && delta(s, c, 'pr') > 0; });
+    if (pol.length) out.push(['Polarização', 'Abaixo do Básico e Proficiente subiram juntos em ' + names(pol) + '. O grupo do meio se dividiu: parte avançou e parte recuou.']);
+    var hi = Math.max.apply(null, S.map(function (s) { return s[c].ab[1]; }));
+    var hs = S.filter(function (s) { return s[c].ab[1] === hi; });
+    out.push(['Maior Abaixo do Básico na 2ª AvD', names(hs) + ' (' + pct(hi) + ').']);
+    out.push(['Faixa Básico', 'A média da rede foi de ' + pct(net(c, 'ba', 0)) + ' para ' + pct(net(c, 'ba', 1)) + '. ' + (net(c, 'ba', 1) < net(c, 'ba', 0) ? 'Estudantes saíram do Básico, em sua maioria para o Proficiente.' : 'O Básico segue como a faixa mais numerosa.')]);
+    return out;
+  }
+
+  /* ---------- TABELA ---------- */
+  function tableRows(c) {
+    return S.map(function (s, i) {
+      var m = s[c];
+      return {
+        idx: i, s: s, name: s.name, diag: m.diag, rk: m.rk,
+        ab1: m.ab[0], ab2: m.ab[1], abD: delta(s, c, 'ab'),
+        ba1: m.ba[0], ba2: m.ba[1], baD: delta(s, c, 'ba'),
+        pr1: m.pr[0], pr2: m.pr[1], prD: delta(s, c, 'pr')
+      };
+    });
+  }
+
+  function renderTable() {
+    var c = state.comp;
+    $('#tBadge').textContent = COMP[c];
+    var rows = tableRows(c);
+    var q = state.q.trim().toLowerCase();
+    if (q) rows = rows.filter(function (r) { return r.name.toLowerCase().indexOf(q) >= 0; });
+    var k = state.sort, dir = state.dir;
+    rows.sort(function (a, b) {
+      if (k === 'name') return dir * a.name.localeCompare(b.name, 'pt-BR');
+      return dir * (a[k] - b[k]) || a.name.localeCompare(b.name, 'pt-BR');
+    });
+    var tbl = $('#tbl'); tbl.replaceChildren();
+    function sortTh(label, key, cls, extra) {
+      var attrs = { 'class': cls || '', scope: 'col' };
+      if (extra) for (var e in extra) attrs[e] = extra[e];
+      if (state.sort === key) attrs['aria-sort'] = state.dir > 0 ? 'ascending' : 'descending';
+      var th = h('th', attrs);
+      var btn = h('button', { type: 'button', 'class': 'th-btn' }, [label, h('span', { 'class': 'ar', 'aria-hidden': 'true', text: state.sort === key ? (state.dir > 0 ? '▲' : '▼') : '↕' })]);
+      btn.addEventListener('click', function () {
+        if (state.sort === key) state.dir = -state.dir; else { state.sort = key; state.dir = key === 'name' ? 1 : -1; }
+        renderTable();
+      });
+      th.appendChild(btn);
+      return th;
+    }
+    var thead = h('thead');
+    var r1h = h('tr', {}, [
+      sortTh('Escola', 'name', '', { rowspan: 2 }),
+      sortTh('Diagnóstico', 'diag', 'num', { rowspan: 2 }),
+      sortTh('Rank AvD', 'rk', 'num', { rowspan: 2, title: 'Posição informada no ranking da AvD. O universo de comparação não consta nos dados.' }),
+      h('th', { 'class': 'grp grp-ab', colspan: 3, text: 'Abaixo do Básico' }),
+      h('th', { 'class': 'grp grp-ba', colspan: 3, text: 'Básico' }),
+      h('th', { 'class': 'grp grp-pr', colspan: 3, text: 'Proficiente' })
+    ]);
+    var r2h = h('tr', {}, [
+      sortTh('1ª AvD', 'ab1', 'num'), sortTh('2ª AvD', 'ab2', 'num'), sortTh('Δ p.p.', 'abD', 'num'),
+      sortTh('1ª AvD', 'ba1', 'num'), sortTh('2ª AvD', 'ba2', 'num'), sortTh('Δ p.p.', 'baD', 'num'),
+      sortTh('1ª AvD', 'pr1', 'num'), sortTh('2ª AvD', 'pr2', 'num'), sortTh('Δ p.p.', 'prD', 'num')
+    ]);
+    thead.appendChild(r1h); thead.appendChild(r2h); tbl.appendChild(thead);
+    var tb = h('tbody');
+    function dCell(b, d, hl) {
+      var td = h('td', { 'class': 'num' + (hl ? ' hl' : '') });
+      td.appendChild(h('span', { 'class': 'd ' + tone(b, d), text: arrow(d) + ' ' + dnum(d) }));
+      return td;
+    }
+    function nCell(v, hl) { return h('td', { 'class': 'num' + (hl ? ' hl' : ''), text: pct(v) }); }
+    rows.forEach(function (r) {
+      var tr = h('tr', { tabindex: 0, 'aria-label': 'Abrir detalhe de ' + r.name });
+      tr.appendChild(h('td', { text: r.name }));
+      tr.appendChild(h('td', { 'class': 'num', text: fmt(r.diag) }));
+      tr.appendChild(h('td', { 'class': 'num', text: r.rk + 'º' }));
+      var fb = state.band;
+      tr.appendChild(nCell(r.ab1, fb === 'ab')); tr.appendChild(nCell(r.ab2, fb === 'ab')); tr.appendChild(dCell('ab', r.abD, fb === 'ab'));
+      tr.appendChild(nCell(r.ba1, fb === 'ba')); tr.appendChild(nCell(r.ba2, fb === 'ba')); tr.appendChild(dCell('ba', r.baD, fb === 'ba'));
+      tr.appendChild(nCell(r.pr1, fb === 'pr')); tr.appendChild(nCell(r.pr2, fb === 'pr')); tr.appendChild(dCell('pr', r.prD, fb === 'pr'));
+      function open() { state.school = r.idx; go('comparar'); }
+      tr.addEventListener('click', open);
+      tr.addEventListener('keydown', function (e) { if (e.key === 'Enter') open(); });
+      tb.appendChild(tr);
+    });
+    if (!rows.length) tb.appendChild(h('tr', {}, [h('td', { colspan: 12, text: 'Nenhuma escola encontrada.' })]));
+    tbl.appendChild(tb);
+    var tf = h('tfoot'), tr2 = h('tr');
+    tr2.appendChild(h('td', { text: 'Média da rede' }));
+    tr2.appendChild(h('td', { 'class': 'num', text: fmt(mean(S.map(function (s) { return s[c].diag; }))) }));
+    tr2.appendChild(h('td', { 'class': 'num', text: '–' }));
+    ['ab', 'ba', 'pr'].forEach(function (b) {
+      var a = net(c, b, 0), z = net(c, b, 1);
+      tr2.appendChild(h('td', { 'class': 'num', text: pct(a) }));
+      tr2.appendChild(h('td', { 'class': 'num', text: pct(z) }));
+      var td = h('td', { 'class': 'num' });
+      td.appendChild(h('span', { 'class': 'd ' + tone(b, z - a), text: arrow(z - a) + ' ' + dnum(z - a) }));
+      tr2.appendChild(td);
+    });
+    tf.appendChild(tr2); tbl.appendChild(tf);
+  }
+
+  /* ---------- COMPARAR ---------- */
+  function signals(s) {
+    var out = [];
+    ['LP', 'MT'].forEach(function (c) {
+      var ab = delta(s, c, 'ab'), pr = delta(s, c, 'pr'), m = s[c];
+      if (ab > 0) out.push({ t: 'bad', tag: 'Atenção', m: c + ': o Abaixo do Básico subiu ' + dpp(ab) + ' (' + pct(m.ab[0]) + ' → ' + pct(m.ab[1]) + ').' });
+      if (pr < 0) out.push({ t: 'bad', tag: 'Atenção', m: c + ': o Proficiente caiu ' + dpp(pr) + ' (' + pct(m.pr[0]) + ' → ' + pct(m.pr[1]) + ').' });
+      if (ab > 0 && pr > 0) out.push({ t: 'warn', tag: 'Polarização', m: c + ': Abaixo do Básico e Proficiente subiram juntos. Vale olhar os estudantes que saíram do Básico para baixo.' });
+      if (pr >= 20) out.push({ t: 'good', tag: 'Destaque', m: c + ': o Proficiente subiu ' + dpp(pr) + '. Vale documentar a prática desta escola.' });
+      if (m.ab[1] >= 12) out.push({ t: 'warn', tag: 'Observar', m: c + ': ' + pct(m.ab[1]) + ' dos estudantes seguem no Abaixo do Básico na 2ª AvD.' });
+      if (m.pr[1] < net(c, 'pr', 1)) out.push({ t: 'neutral', tag: 'Referência', m: c + ': Proficiente na 2ª AvD (' + pct(m.pr[1]) + ') abaixo da média da rede (' + pct(net(c, 'pr', 1)) + ').' });
+    });
+    if (!out.length) out.push({ t: 'good', tag: 'Sem alertas', m: 'Nenhum alerta pelos critérios do painel.' });
+    var order = { bad: 0, warn: 1, good: 2, neutral: 3 };
+    out.sort(function (a, b) { return order[a.t] - order[b.t]; });
+    return out;
+  }
+
+  function renderComparar() {
+    var s = S[state.school];
+    var sel = $('#cSel');
+    if (!sel.options.length) {
+      S.forEach(function (x, i) { sel.appendChild(h('option', { value: i, text: x.name + ' (' + x.code + ')' })); });
+    }
+    sel.value = String(state.school);
+    $('#cName').textContent = s.name;
+    var head = $('#cHead'); head.replaceChildren();
+    ['LP', 'MT'].forEach(function (c) {
+      head.appendChild(h('span', { 'class': 'chip neutral', text: COMP[c] + ': diagnóstico ' + fmt(s[c].diag) + ' · rank AvD ' + s[c].rk + 'º' }));
+    });
+    var cards = $('#cCards'); cards.replaceChildren();
+    ['LP', 'MT'].forEach(function (c) {
+      var m = s[c];
+      var card = h('div', { 'class': 'card' });
+      card.appendChild(h('span', { 'class': 'badge azul', text: c }));
+      card.appendChild(h('h2', { text: COMP[c] }));
+      var lg = h('div', { 'class': 'legend' }); legend(lg, ['ab', 'ba', 'pr'].map(function (k) { return { label: BAND[k], color: BAND_COL[k] }; }));
+      card.appendChild(lg);
+      var ch = h('div', { 'class': 'chart' }); card.appendChild(ch);
+      var rows = [
+        { label: 'Escola 1ª', strong: true, title: s.short + ' · 1ª AvD', vals: [m.ab[0], m.ba[0], m.pr[0]] },
+        { label: 'Escola 2ª', strong: true, title: s.short + ' · 2ª AvD', vals: [m.ab[1], m.ba[1], m.pr[1]] },
+        { label: 'Rede 1ª', gapBefore: 14, title: 'Média da rede · 1ª AvD', vals: ['ab', 'ba', 'pr'].map(function (k) { return net(c, k, 0); }) },
+        { label: 'Rede 2ª', title: 'Média da rede · 2ª AvD', vals: ['ab', 'ba', 'pr'].map(function (k) { return net(c, k, 1); }) }
+      ];
+      cards.appendChild(card);
+      stackedChart(ch, rows, { aria: COMP[c] + ': escola e média da rede', labW: 84 });
+      var wrap = h('div', { 'class': 'mini-wrap' });
+      var t = h('table', { 'class': 'mini' });
+      t.appendChild(h('thead', {}, [h('tr', {}, [
+        h('th', { text: 'Faixa' }), h('th', { 'class': 'num', text: '1ª → 2ª AvD' }), h('th', { 'class': 'num', text: 'Δ escola' }), h('th', { 'class': 'num', text: 'Δ rede' })
+      ])]));
+      var tb = h('tbody');
+      ['ab', 'ba', 'pr'].forEach(function (k) {
+        var d = delta(s, c, k), dn = net(c, k, 1) - net(c, k, 0);
+        tb.appendChild(h('tr', {}, [
+          h('td', { text: BAND[k] }),
+          h('td', { 'class': 'num', text: pct(m[k][0]) + ' → ' + pct(m[k][1]) }),
+          h('td', { 'class': 'num' }, [h('span', { 'class': 'd ' + tone(k, d), text: arrow(d) + ' ' + dpp(d) })]),
+          h('td', { 'class': 'num', text: dpp(dn) })
+        ]));
+      });
+      t.appendChild(tb); wrap.appendChild(t); card.appendChild(wrap);
+    });
+    var ul = $('#cSignals'); ul.replaceChildren();
+    signals(s).forEach(function (x) {
+      ul.appendChild(h('li', {}, [h('span', { 'class': 'tag ' + x.t, text: x.tag }), h('span', { text: x.m })]));
+    });
+  }
+
+  /* ---------- QUADRANTES ---------- */
+  function renderQuadrantes() {
+    var c = state.comp;
+    $('#qBadge').textContent = COMP[c];
+    legend($('#qLegend'), [
+      { label: 'Polarização (Abaixo do Básico e Proficiente sobem)', color: RED },
+      { label: 'Demais escolas', color: NAVY }
+    ], true);
+    var pts = S.map(function (s) {
+      var a = delta(s, c, 'ab'), p = delta(s, c, 'pr');
+      return { school: s, x: a, y: p, a0: s[c].ab[0], a1: s[c].ab[1], p0: s[c].pr[0], p1: s[c].pr[1], color: (a > 0 && p > 0) ? RED : NAVY };
+    });
+    scatter($('#qChart'), pts, {});
+  }
+
+  /* ---------- GRUPOS ---------- */
+  function groupsDef() {
+    var avgPr = { LP: net('LP', 'pr', 1), MT: net('MT', 'pr', 1) };
+    return [
+      {
+        id: 'rec', title: 'Recuperação a documentar', badge: 'verde',
+        rule: 'Proficiente subiu 20 p.p. ou mais em LP ou em MT. Ideal para registrar práticas e socializar nos encontros de formação.',
+        test: function (s) { return ['LP', 'MT'].some(function (c) { return delta(s, c, 'pr') >= 20; }); },
+        detail: function (s) {
+          return ['LP', 'MT'].filter(function (c) { return delta(s, c, 'pr') >= 20; }).map(function (c) {
+            return c + ' Prof. ' + pct(s[c].pr[0]) + ' → ' + pct(s[c].pr[1]) + ' (' + dpp(delta(s, c, 'pr')) + ')';
+          }).join(' · ');
+        }
+      },
+      {
+        id: 'lp', title: 'Atenção em Língua Portuguesa', badge: '',
+        rule: 'Proficiente em LP caiu entre as AvDs, ou 12% ou mais dos estudantes seguem no Abaixo do Básico na 2ª AvD. Foco em leitura, interpretação e retomada de habilidades-base.',
+        test: function (s) { return delta(s, 'LP', 'pr') < 0 || s.LP.ab[1] >= 12; },
+        detail: function (s) {
+          var p = [];
+          if (delta(s, 'LP', 'pr') < 0) p.push('Prof. LP caiu ' + dpp(delta(s, 'LP', 'pr')));
+          if (s.LP.ab[1] >= 12) p.push('Abaixo LP ' + pct(s.LP.ab[1]) + ' na 2ª AvD');
+          return p.join(' · ');
+        }
+      },
+      {
+        id: 'mt', title: 'Atenção em Matemática: quem desceu', badge: '',
+        rule: 'Abaixo do Básico em MT subiu entre as AvDs. Em todas essas escolas o Proficiente também subiu, então a recuperação precisa alcançar os estudantes que caíram, e não só acelerar quem avançou.',
+        test: function (s) { return delta(s, 'MT', 'ab') > 0; },
+        detail: function (s) { return 'Abaixo MT ' + pct(s.MT.ab[0]) + ' → ' + pct(s.MT.ab[1]) + ' (' + dpp(delta(s, 'MT', 'ab')) + ') · Prof. ' + dpp(delta(s, 'MT', 'pr')); }
+      },
+      {
+        id: 'int', title: 'Acompanhamento intensivo', badge: '',
+        rule: 'Proficiente na 2ª AvD abaixo da média da rede em LP (' + pct(avgPr.LP) + ') e em MT (' + pct(avgPr.MT) + ').',
+        test: function (s) { return s.LP.pr[1] < avgPr.LP && s.MT.pr[1] < avgPr.MT; },
+        detail: function (s) { return 'Prof. 2ª AvD: LP ' + pct(s.LP.pr[1]) + ' · MT ' + pct(s.MT.pr[1]); }
+      }
+    ];
+  }
+
+  function renderGrupos() {
+    var host = $('#gCards'); host.replaceChildren();
+    var inAny = {};
+    groupsDef().forEach(function (g) {
+      var list = S.map(function (s, i) { return { s: s, i: i }; }).filter(function (x) { return g.test(x.s); });
+      list.forEach(function (x) { inAny[x.i] = 1; });
+      var card = h('div', { 'class': 'card' });
+      card.appendChild(h('span', { 'class': 'badge ' + g.badge, text: list.length + (list.length === 1 ? ' escola' : ' escolas') }));
+      card.appendChild(h('h2', { text: g.title }));
+      card.appendChild(h('div', { 'class': 'rule', text: g.rule }));
+      var ul = h('ul', { 'class': 'school-list' });
+      if (!list.length) ul.appendChild(h('li', { 'class': 'empty', text: 'Nenhuma escola atende à regra.' }));
+      list.forEach(function (x) {
+        var btn = h('button', { type: 'button', 'class': 'chip-btn' }, [h('b', { text: x.s.short }), h('span', { text: g.detail(x.s) })]);
+        btn.addEventListener('click', function () { state.school = x.i; go('comparar'); });
+        ul.appendChild(h('li', {}, [btn]));
+      });
+      card.appendChild(ul);
+      host.appendChild(card);
+    });
+    var rest = S.filter(function (s, i) { return !inAny[i]; });
+    var card = h('div', { 'class': 'card' });
+    card.appendChild(h('span', { 'class': 'badge azul', text: rest.length + (rest.length === 1 ? ' escola' : ' escolas') }));
+    card.appendChild(h('h2', { text: 'Fora dos quatro grupos' }));
+    card.appendChild(h('div', { 'class': 'rule', text: 'Não atendem a nenhuma das regras acima. Isso não dispensa o acompanhamento de rotina: veja o detalhe de cada escola.' }));
+    var ul2 = h('ul', { 'class': 'school-list' });
+    if (!rest.length) ul2.appendChild(h('li', { 'class': 'empty', text: 'Todas as escolas aparecem em pelo menos um grupo.' }));
+    rest.forEach(function (s) {
+      var btn = h('button', { type: 'button', 'class': 'chip-btn' }, [h('b', { text: s.short })]);
+      btn.addEventListener('click', function () { state.school = S.indexOf(s); go('comparar'); });
+      ul2.appendChild(h('li', {}, [btn]));
+    });
+    card.appendChild(ul2);
+    host.appendChild(card);
+  }
+
+  /* ---------- NAVEGAÇÃO E RENDER ---------- */
+  var lastW = 0, raf = 0;
+  function go(tab) {
+    state.tab = tab;
+    try { if (location.hash !== '#' + tab) location.hash = tab; } catch (e) { /* ignora */ }
+    render();
+    window.scrollTo(0, 0);
+  }
+
+  function buildNav() {
+    var nav = $('#nav'); nav.replaceChildren();
+    TABS.forEach(function (t) {
+      var b = h('button', { type: 'button', 'class': 'nav-btn', role: 'tab', 'data-tab': t[0], text: t[1] });
+      b.addEventListener('click', function () { go(t[0]); });
+      nav.appendChild(b);
+    });
+  }
+
+  function render() {
+    tipHide();
+    var f = FILTER_TABS[state.tab] || [];
+    $('#filters').hidden = !f.length;
+    $('#fComp').hidden = f.indexOf('comp') < 0;
+    $('#fBand').hidden = f.indexOf('band') < 0;
+    [].forEach.call(document.querySelectorAll('#nav .nav-btn'), function (b) {
+      var on = b.getAttribute('data-tab') === state.tab;
+      b.classList.toggle('active', on); b.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    [].forEach.call(document.querySelectorAll('#fComp .nav-btn'), function (b) {
+      var on = b.getAttribute('data-comp') === state.comp; b.classList.toggle('active', on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    [].forEach.call(document.querySelectorAll('#fBand .nav-btn'), function (b) {
+      var on = b.getAttribute('data-band') === state.band; b.classList.toggle('active', on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    TABS.forEach(function (t) { $('#s-' + t[0]).hidden = t[0] !== state.tab; });
+    lastW = $('#app').clientWidth;
+    if (state.tab === 'panorama') renderPanorama();
+    else if (state.tab === 'escolas') renderTable();
+    else if (state.tab === 'comparar') renderComparar();
+    else if (state.tab === 'quadrantes') renderQuadrantes();
+    else if (state.tab === 'grupos') renderGrupos();
+  }
+
+  function fromHash() {
+    var t = (location.hash || '').slice(1);
+    return TABS.some(function (x) { return x[0] === t; }) ? t : null;
+  }
+
+  buildNav();
+  [].forEach.call(document.querySelectorAll('#fComp .nav-btn'), function (b) {
+    b.addEventListener('click', function () { state.comp = b.getAttribute('data-comp'); render(); });
+  });
+  [].forEach.call(document.querySelectorAll('#fBand .nav-btn'), function (b) {
+    b.addEventListener('click', function () { state.band = b.getAttribute('data-band'); render(); });
+  });
+  $('#q').addEventListener('input', function (e) { state.q = e.target.value; renderTable(); });
+  $('#cSel').addEventListener('change', function (e) { state.school = parseInt(e.target.value, 10); renderComparar(); });
+  window.addEventListener('hashchange', function () { var t = fromHash(); if (t && t !== state.tab) { state.tab = t; render(); } });
+  window.addEventListener('resize', function () {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(function () { if (Math.abs($('#app').clientWidth - lastW) >= 2) render(); });
+  });
+
+  state.tab = fromHash() || 'panorama';
+  render();
+})();
+</script>
+
+</body></html>
